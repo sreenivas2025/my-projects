@@ -1,14 +1,11 @@
-# Use a lightweight JDK runtime
-FROM eclipse-temurin:17-jdk
+ROM eclipse-temurin:17-jdk-alpine
+    
+EXPOSE 8080
+ 
+ENV APP_HOME /usr/src/app
 
-# Set working directory
-WORKDIR /app
+COPY target/*.jar $APP_HOME/app.jar
 
-# Copy your already built JAR into the container
-COPY target/BusinessProject-0.0.1-SNAPSHOT.jar app.jar
+WORKDIR $APP_HOME
 
-# Expose the Spring Boot app port
-EXPOSE 2330
-
-# Run the JAR
-ENTRYPOINT ["java", "-jar", "app.jar"]
+CMD ["java", "-jar", "app.jar"]
